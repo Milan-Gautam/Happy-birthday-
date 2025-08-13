@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Susmita</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: #000;
+        color: white;
+        text-align: center;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+
+    /* Music Player */
+    audio {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        outline: none;
+        z-index: 1000;
+    }
+
+    /* Image Ring */
+    .ring {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        margin: 80px auto 0;
+        animation: rotate 20s linear infinite;
+        transform-style: preserve-3d;
+    }
+    .ring img {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 0 15px #fff;
+    }
+    @keyframes rotate {
+        from { transform: rotateY(0deg); }
+        to { transform: rotateY(360deg); }
+    }
+
+    /* Position images around the ring */
+    .ring img:nth-child(1) { transform: rotateY(0deg) translateZ(150px); }
+    .ring img:nth-child(2) { transform: rotateY(60deg) translateZ(150px); }
+    .ring img:nth-child(3) { transform: rotateY(120deg) translateZ(150px); }
+    .ring img:nth-child(4) { transform: rotateY(180deg) translateZ(150px); }
+    .ring img:nth-child(5) { transform: rotateY(240deg) translateZ(150px); }
+    .ring img:nth-child(6) { transform: rotateY(300deg) translateZ(150px); }
+
+    /* Central looping title */
+    .birthday-title {
+        font-size: 2em;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 3px solid white;
+        width: 0;
+        height:60px;
+        margin-top: 100px;
+        animation: typing 3s steps(30, end) infinite alternate, glow 3s linear infinite;
+        background: linear-gradient(90deg, #ff00ff, #ff9900, #00ffff, #ff00ff);
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 20ch; }
+    }
+    @keyframes glow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Middle fixed text */
+    .together {
+    font-size: 1em;
+    margin-top: 20px;
+    font-weight: 450;
+    font-style: italic;
+    background: linear-gradient(90deg, #ff4da6, #ffcc00, #66ffcc, #ff4da6);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glowText 5s ease-in-out infinite;
+    text-shadow: 0 0 15px rgba(255, 77, 166, 0.6),
+                 0 0 25px rgba(255, 204, 0, 0.5),
+                 0 0 35px rgba(102, 255, 204, 0.4);
+}
+
+@keyframes glowText {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+    /* Bottom love quotes */
+    .quotes {
+    font-size: 1.1em;
+    margin-bottom: 40px;
+    padding: 3px;
+    font-weight: bold;
+    text-align: center;
+    color: #ff6f61; /* Soft coral tone */
+    text-shadow: 0 0 10px rgba(255, 111, 97, 0.6),
+                 0 0 20px rgba(255, 111, 97, 0.4);
+    animation: fadeInUp 1.2s ease-in-out;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}: 1; }
+    }
+</style>
+</head>
+<body>
+
+<!-- Music Player -->
+<audio id="bgMusic" controls autoplay loop>
+    <source src="placeholder.mp3" type="audio/mpeg">
+</audio>
+
+
+
+<!-- Central looping title -->
+<div class="birthday-title">Happy Birthday Susmita</div>
+
+<!-- Middle static text -->
+<div class="together">Celebrating your 5th birthday together…Hope to celebrate another 80 years together.</div>
+
+<!-- Rotating Image Ring -->
+<div class="ring">
+    <img src="img1.jpg" alt="">
+    <img src="img2.jpg" alt="">
+    <img src="img3.jpg" alt="">
+    <img src="img4.jpg" alt="">
+    <img src="img5.jpg" alt="">
+    <img src="img6.jpg" alt="">
+</div>
+
+<!-- Bottom looping quotes -->
+<div class="quotes" id="quote"></div>
+
+<script>
+    // Quotes array
+    const quotes = [
+       "You’re the reason my favorite place is right beside you ❤️",
+"Every time you smile, my world becomes a little more perfect 💕",
+"I don’t need the stars, the moon, or the sun… I just need you 💖",
+"No matter where life takes us, my heart will always find its way back to you ☀️",
+"Loving you isn’t a choice, it’s who I am 💘",
+"In your arms, I’ve found my home ❤️",
+"Every heartbeat whispers your name 💕",
+"You’re my first thought in the morning and my last at night 💖",
+"With you, I’ve found the kind of love that feels like magic ☀️",
+"You’re not just my love, you’re my whole world 💘",
+"Every little thing reminds me of you ❤️",
+"You make my heart feel safe 💕",
+"Life is better when I’m holding your hand 💖",
+"My favorite part of the day is any moment spent with you ☀️",
+"With you, forever doesn’t feel long enough 💘"
+    ];
+    let quoteIndex = 0;
+    const quoteElement = document.getElementById("quote");
+
+    function showQuote() {
+        quoteElement.textContent = quotes[quoteIndex];
+        quoteIndex = (quoteIndex + 1) % quotes.length;
+    }
+    showQuote();
+    setInterval(showQuote, 3000);
+</script>
+
+</body>
+</html>
